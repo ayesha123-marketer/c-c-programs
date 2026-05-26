@@ -1,0 +1,18 @@
+// COMPUTER REPAIR RECORD SYSTEM
+#include <iostream>
+using namespace std;
+
+int main() {
+
+    string customer, issue;
+
+    cout << "Enter Customer Name: ";
+    cin >> customer;
+
+    cout << "Enter Computer Issue: ";
+    cin >> issue;
+
+    cout << "\nRepair Record Saved Successfully";
+
+    return 0;
+}
