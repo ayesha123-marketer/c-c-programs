@@ -1,0 +1,93 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+class Product {
+public:
+    int id;
+    string name;
+    int quantity;
+    double price;
+
+    void input() {
+        cout << "\nEnter Product ID: ";
+        cin >> id;
+
+        cin.ignore();
+        cout << "Enter Product Name: ";
+        getline(cin, name);
+
+        cout << "Enter Quantity: ";
+        cin >> quantity;
+
+        cout << "Enter Price: ";
+        cin >> price;
+    }
+
+    void display() {
+        cout << "\nID: " << id
+             << "\nName: " << name
+             << "\nQuantity: " << quantity
+             << "\nPrice: $" << price
+             << "\n----------------------";
+    }
+};
+
+int main() {
+    Product p;
+    int choice;
+
+    do {
+        cout << "\n===== Inventory Management System =====";
+        cout << "\n1. Add Product";
+        cout << "\n2. View Products";
+        cout << "\n3. Exit";
+        cout << "\nEnter Choice: ";
+        cin >> choice;
+
+        switch(choice) {
+            case 1: {
+                ofstream file("inventory.txt", ios::app);
+
+                p.input();
+
+                file << p.id << endl;
+                file << p.name << endl;
+                file << p.quantity << endl;
+                file << p.price << endl;
+
+                file.close();
+
+                cout << "\nProduct Added Successfully!";
+                break;
+            }
+
+            case 2: {
+                ifstream file("inventory.txt");
+
+                while(file >> p.id) {
+                    file.ignore();
+                    getline(file, p.name);
+                    file >> p.quantity;
+                    file >> p.price;
+
+                    p.display();
+                }
+
+                file.close();
+                break;
+            }
+
+            case 3:
+                cout << "\nThank You!";
+                break;
+
+            default:
+                cout << "\nInvalid Choice!";
+        }
+
+    } while(choice != 3);
+
+    return 0;
+}
