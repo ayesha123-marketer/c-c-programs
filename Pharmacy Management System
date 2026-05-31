@@ -1,0 +1,134 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+class Medicine {
+public:
+    int id;
+    string name;
+    int quantity;
+    float price;
+
+    void addMedicine() {
+        cout << "\nEnter Medicine ID: ";
+        cin >> id;
+        cin.ignore();
+
+        cout << "Enter Medicine Name: ";
+        getline(cin, name);
+
+        cout << "Enter Quantity: ";
+        cin >> quantity;
+
+        cout << "Enter Price: ";
+        cin >> price;
+
+        ofstream file("pharmacy.txt", ios::app);
+        file << id << endl;
+        file << name << endl;
+        file << quantity << endl;
+        file << price << endl;
+        file.close();
+
+        cout << "\nMedicine Added Successfully!\n";
+    }
+
+    void displayMedicine() {
+        cout << "\nID: " << id;
+        cout << "\nName: " << name;
+        cout << "\nQuantity: " << quantity;
+        cout << "\nPrice: $" << price;
+        cout << "\n-------------------------";
+    }
+};
+
+void viewMedicines() {
+    Medicine m;
+    ifstream file("pharmacy.txt");
+
+    if (!file) {
+        cout << "\nNo records found!\n";
+        return;
+    }
+
+    while (file >> m.id) {
+        file.ignore();
+        getline(file, m.name);
+        file >> m.quantity;
+        file >> m.price;
+
+        m.displayMedicine();
+    }
+
+    file.close();
+}
+
+void searchMedicine() {
+    int searchId;
+    bool found = false;
+
+    cout << "\nEnter Medicine ID to Search: ";
+    cin >> searchId;
+
+    Medicine m;
+    ifstream file("pharmacy.txt");
+
+    while (file >> m.id) {
+        file.ignore();
+        getline(file, m.name);
+        file >> m.quantity;
+        file >> m.price;
+
+        if (m.id == searchId) {
+            cout << "\nMedicine Found!\n";
+            m.displayMedicine();
+            found = true;
+            break;
+        }
+    }
+
+    file.close();
+
+    if (!found)
+        cout << "\nMedicine Not Found!\n";
+}
+
+int main() {
+    Medicine med;
+    int choice;
+
+    do {
+        cout << "\n\n===== PHARMACY MANAGEMENT SYSTEM =====";
+        cout << "\n1. Add Medicine";
+        cout << "\n2. View Medicines";
+        cout << "\n3. Search Medicine";
+        cout << "\n4. Exit";
+        cout << "\nEnter Choice: ";
+        cin >> choice;
+
+        switch(choice) {
+            case 1:
+                med.addMedicine();
+                break;
+
+            case 2:
+                viewMedicines();
+                break;
+
+            case 3:
+                searchMedicine();
+                break;
+
+            case 4:
+                cout << "\nThank You!\n";
+                break;
+
+            default:
+                cout << "\nInvalid Choice!\n";
+        }
+
+    } while(choice != 4);
+
+    return 0;
+}
