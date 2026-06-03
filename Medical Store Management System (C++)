@@ -1,0 +1,177 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <iomanip>
+using namespace std;
+
+struct Medicine {
+    int id;
+    string name;
+    int quantity;
+    float price;
+};
+
+// ------------------ Add Medicine ------------------
+void addMedicine() {
+    Medicine m;
+    ofstream file("medicine.txt", ios::app);
+
+    cout << "Enter Medicine ID: ";
+    cin >> m.id;
+    cout << "Enter Medicine Name: ";
+    cin >> m.name;
+    cout << "Enter Quantity: ";
+    cin >> m.quantity;
+    cout << "Enter Price: ";
+    cin >> m.price;
+
+    file << m.id << " " << m.name << " " << m.quantity << " " << m.price << endl;
+    file.close();
+
+    cout << "\nMedicine Added Successfully!\n";
+}
+
+// ------------------ Show Medicines ------------------
+void showMedicines() {
+    ifstream file("medicine.txt");
+    Medicine m;
+
+    cout << "\nID\tName\tQty\tPrice\n";
+    cout << "---------------------------------\n";
+
+    while (file >> m.id >> m.name >> m.quantity >> m.price) {
+        cout << m.id << "\t" << m.name << "\t" << m.quantity << "\t" << m.price << endl;
+    }
+
+    file.close();
+}
+
+// ------------------ Search Medicine ------------------
+void searchMedicine() {
+    int id;
+    cout << "Enter Medicine ID to Search: ";
+    cin >> id;
+
+    ifstream file("medicine.txt");
+    Medicine m;
+    bool found = false;
+
+    while (file >> m.id >> m.name >> m.quantity >> m.price) {
+        if (m.id == id) {
+            cout << "\nMedicine Found!\n";
+            cout << "Name: " << m.name << endl;
+            cout << "Quantity: " << m.quantity << endl;
+            cout << "Price: " << m.price << endl;
+            found = true;
+        }
+    }
+
+    if (!found)
+        cout << "Medicine Not Found!\n";
+
+    file.close();
+}
+
+// ------------------ Delete Medicine ------------------
+void deleteMedicine() {
+    int id;
+    cout << "Enter Medicine ID to Delete: ";
+    cin >> id;
+
+    ifstream file("medicine.txt");
+    ofstream temp("temp.txt");
+
+    Medicine m;
+
+    while (file >> m.id >> m.name >> m.quantity >> m.price) {
+        if (m.id != id) {
+            temp << m.id << " " << m.name << " " << m.quantity << " " << m.price << endl;
+        }
+    }
+
+    file.close();
+    temp.close();
+
+    remove("medicine.txt");
+    rename("temp.txt", "medicine.txt");
+
+    cout << "Medicine Deleted Successfully!\n";
+}
+
+// ------------------ Billing System ------------------
+void billing() {
+    int id, qty;
+    float total = 0;
+
+    ifstream file("medicine.txt");
+    vector<Medicine> meds;
+    Medicine m;
+
+    while (file >> m.id >> m.name >> m.quantity >> m.price) {
+        meds.push_back(m);
+    }
+    file.close();
+
+    cout << "Enter Medicine ID for Billing (0 to stop):\n";
+
+    while (true) {
+        cin >> id;
+        if (id == 0) break;
+
+        cout << "Enter Quantity: ";
+        cin >> qty;
+
+        for (auto &med : meds) {
+            if (med.id == id) {
+                if (med.quantity >= qty) {
+                    med.quantity -= qty;
+                    total += qty * med.price;
+                    cout << "Added: " << med.name << endl;
+                } else {
+                    cout << "Not enough stock!\n";
+                }
+            }
+        }
+    }
+
+    ofstream update("medicine.txt");
+    for (auto &med : meds) {
+        update << med.id << " " << med.name << " " << med.quantity << " " << med.price << endl;
+    }
+    update.close();
+
+    cout << "\nTOTAL BILL = " << total << " PKR\n";
+
+    ofstream sales("sales.txt", ios::app);
+    sales << "Total Sale: " << total << endl;
+    sales.close();
+}
+
+// ------------------ Menu ------------------
+int main() {
+    int choice;
+
+    while (true) {
+        cout << "\n===== MEDICAL STORE SYSTEM =====\n";
+        cout << "1. Add Medicine\n";
+        cout << "2. Show Medicines\n";
+        cout << "3. Search Medicine\n";
+        cout << "4. Delete Medicine\n";
+        cout << "5. Billing\n";
+        cout << "6. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1: addMedicine(); break;
+            case 2: showMedicines(); break;
+            case 3: searchMedicine(); break;
+            case 4: deleteMedicine(); break;
+            case 5: billing(); break;
+            case 6: exit(0);
+            default: cout << "Invalid Choice!\n";
+        }
+    }
+
+    return 0;
+}
