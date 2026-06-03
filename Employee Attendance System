@@ -1,0 +1,26 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+struct Emp {
+    int id;
+    string name;
+    string status;
+};
+
+int main() {
+    ofstream f("attendance.txt", ios::app);
+
+    int n;
+    cout << "Enter number of employees: ";
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        Emp e;
+        cout << "ID Name Status(P/A): ";
+        cin >> e.id >> e.name >> e.status;
+        f << e.id << " " << e.name << " " << e.status << "\n";
+    }
+
+    cout << "Attendance Saved!\n";
+}
