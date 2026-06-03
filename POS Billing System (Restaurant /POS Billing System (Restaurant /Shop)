@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+struct Item {
+    string name;
+    float price;
+};
+
+int main() {
+    Item menu[] = {{"Burger", 300}, {"Pizza", 1200}, {"Tea", 100}};
+    int choice, qty;
+    float total = 0;
+
+    while (true) {
+        cout << "\n1 Burger 2 Pizza 3 Tea 4 Bill 5 Exit\n";
+        cin >> choice;
+
+        if (choice == 5) break;
+
+        if (choice >= 1 && choice <= 3) {
+            cout << "Qty: ";
+            cin >> qty;
+            total += menu[choice-1].price * qty;
+        }
+
+        if (choice == 4) {
+            cout << "TOTAL BILL = " << total << endl;
+        }
+    }
+}
