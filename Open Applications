@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+int main()
+{
+    int choice;
+
+    cout << "===== APP LAUNCHER =====\n";
+    cout << "1. Calculator\n";
+    cout << "2. Notepad\n";
+    cout << "3. Paint\n";
+    cout << "Choice: ";
+    cin >> choice;
+
+    switch(choice)
+    {
+        case 1:
+            system("calc");
+            break;
+
+        case 2:
+            system("notepad");
+            break;
+
+        case 3:
+            system("mspaint");
+            break;
+
+        default:
+            cout << "Invalid Choice!";
+    }
+
+    return 0;
+}
