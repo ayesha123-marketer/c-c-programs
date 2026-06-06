@@ -1,0 +1,12 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+int main()
+{
+    cout << "Voice Assistant Started...\n";
+
+    system("powershell -Command \"Add-Type -AssemblyName System.Speech; $speak = New-Object System.Speech.Synthesis.SpeechSynthesizer; $speak.Speak('Welcome to Ayesha AI Assistant');\"");
+
+    return 0;
+}
