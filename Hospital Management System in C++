@@ -1,0 +1,106 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Patient {
+public:
+    int id;
+    string name;
+    int age;
+    string disease;
+};
+
+int main() {
+    Patient patients[100];
+    int totalPatients = 0;
+    int choice;
+
+    do {
+        cout << "\n===== HOSPITAL MANAGEMENT SYSTEM =====\n";
+        cout << "1. Add Patient\n";
+        cout << "2. View Patients\n";
+        cout << "3. Search Patient\n";
+        cout << "4. Exit\n";
+        cout << "Enter Choice: ";
+        cin >> choice;
+
+        switch(choice) {
+
+        case 1:
+            cout << "\nEnter Patient ID: ";
+            cin >> patients[totalPatients].id;
+
+            cin.ignore();
+
+            cout << "Enter Patient Name: ";
+            getline(cin, patients[totalPatients].name);
+
+            cout << "Enter Age: ";
+            cin >> patients[totalPatients].age;
+
+            cin.ignore();
+
+            cout << "Enter Disease: ";
+            getline(cin, patients[totalPatients].disease);
+
+            totalPatients++;
+
+            cout << "\nPatient Added Successfully!\n";
+            break;
+
+        case 2:
+            if(totalPatients == 0) {
+                cout << "\nNo Patients Found!\n";
+            }
+            else {
+                cout << "\n===== PATIENT RECORDS =====\n";
+
+                for(int i = 0; i < totalPatients; i++) {
+                    cout << "\nPatient #" << i + 1 << endl;
+                    cout << "ID: " << patients[i].id << endl;
+                    cout << "Name: " << patients[i].name << endl;
+                    cout << "Age: " << patients[i].age << endl;
+                    cout << "Disease: " << patients[i].disease << endl;
+                }
+            }
+            break;
+
+        case 3:
+        {
+            int searchId;
+            bool found = false;
+
+            cout << "\nEnter Patient ID to Search: ";
+            cin >> searchId;
+
+            for(int i = 0; i < totalPatients; i++) {
+                if(patients[i].id == searchId) {
+                    cout << "\nPatient Found!\n";
+                    cout << "ID: " << patients[i].id << endl;
+                    cout << "Name: " << patients[i].name << endl;
+                    cout << "Age: " << patients[i].age << endl;
+                    cout << "Disease: " << patients[i].disease << endl;
+
+                    found = true;
+                    break;
+                }
+            }
+
+            if(!found) {
+                cout << "\nPatient Not Found!\n";
+            }
+            break;
+        }
+
+        case 4:
+            cout << "\nThank You for Using Hospital Management System!\n";
+            break;
+
+        default:
+            cout << "\nInvalid Choice!\n";
+        }
+
+    } while(choice != 4);
+
+    return 0;
+}
