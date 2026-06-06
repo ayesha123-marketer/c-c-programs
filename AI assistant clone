@@ -1,0 +1,107 @@
+#include <iostream>
+#include <string>
+#include <ctime>
+using namespace std;
+
+int main()
+{
+    string command;
+
+    cout << "=================================\n";
+    cout << "      AI ASSISTANT CLONE\n";
+    cout << "=================================\n";
+    cout << "Type 'help' to see commands.\n";
+
+    while(true)
+    {
+        cout << "\nYou: ";
+        getline(cin, command);
+
+        if(command == "hello")
+        {
+            cout << "AI: Hello! How can I help you?\n";
+        }
+        else if(command == "how are you")
+        {
+            cout << "AI: I am doing great. Thanks for asking!\n";
+        }
+        else if(command == "your name")
+        {
+            cout << "AI: My name is Ayesha AI Assistant.\n";
+        }
+        else if(command == "time")
+        {
+            time_t now = time(0);
+            cout << "AI: Current Time: " << ctime(&now);
+        }
+        else if(command == "date")
+        {
+            time_t now = time(0);
+            cout << "AI: Today's Date & Time: " << ctime(&now);
+        }
+        else if(command == "calculator")
+        {
+            double a, b;
+            char op;
+
+            cout << "Enter first number: ";
+            cin >> a;
+
+            cout << "Enter operator (+ - * /): ";
+            cin >> op;
+
+            cout << "Enter second number: ";
+            cin >> b;
+
+            cin.ignore();
+
+            switch(op)
+            {
+                case '+':
+                    cout << "Result = " << a + b << endl;
+                    break;
+
+                case '-':
+                    cout << "Result = " << a - b << endl;
+                    break;
+
+                case '*':
+                    cout << "Result = " << a * b << endl;
+                    break;
+
+                case '/':
+                    if(b != 0)
+                        cout << "Result = " << a / b << endl;
+                    else
+                        cout << "Cannot divide by zero!\n";
+                    break;
+
+                default:
+                    cout << "Invalid Operator!\n";
+            }
+        }
+        else if(command == "help")
+        {
+            cout << "\nAvailable Commands:\n";
+            cout << "- hello\n";
+            cout << "- how are you\n";
+            cout << "- your name\n";
+            cout << "- time\n";
+            cout << "- date\n";
+            cout << "- calculator\n";
+            cout << "- help\n";
+            cout << "- exit\n";
+        }
+        else if(command == "exit")
+        {
+            cout << "AI: Goodbye!\n";
+            break;
+        }
+        else
+        {
+            cout << "AI: Sorry, I don't understand that command.\n";
+        }
+    }
+
+    return 0;
+}
