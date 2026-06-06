@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    string city;
+
+    cout << "Enter City Name: ";
+    cin >> city;
+
+    cout << "\nWeather Report\n";
+    cout << "City: " << city << endl;
+    cout << "Temperature: 32 C\n";
+    cout << "Humidity: 60%\n";
+    cout << "Condition: Sunny\n";
+
+    return 0;
+}
