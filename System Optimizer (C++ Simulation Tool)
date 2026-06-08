@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+void showMenu() {
+    cout << "\n===== SYSTEM OPTIMIZER TOOL =====\n";
+    cout << "1. Check System Status\n";
+    cout << "2. Simulate RAM Cleanup\n";
+    cout << "3. Show Optimization Tips\n";
+    cout << "4. Exit\n";
+    cout << "Enter choice: ";
+}
+
+void systemStatus() {
+    cout << "\n--- SYSTEM STATUS ---\n";
+    cout << "CPU Usage: High (Simulation)\n";
+    cout << "RAM Usage: 78%\n";
+    cout << "Background Apps: 15 Running\n";
+    cout << "Status: System Slow / Lag Detected\n";
+}
+
+void cleanRAM() {
+    cout << "\n--- CLEANING RAM ---\n";
+    cout << "Closing unnecessary processes...\n";
+    cout << "Clearing cache...\n";
+    cout << "Stopping background apps...\n";
+    cout << "RAM Optimized Successfully (Simulation)\n";
+}
+
+void tips() {
+    cout << "\n--- SPEED IMPROVEMENT TIPS ---\n";
+    cout << "✔ Close unused apps\n";
+    cout << "✔ Restart computer daily\n";
+    cout << "✔ Remove startup programs\n";
+    cout << "✔ Delete temporary files\n";
+    cout << "✔ Use SSD instead of HDD\n";
+}
+
+int main() {
+    int choice;
+
+    do {
+        showMenu();
+        cin >> choice;
+
+        switch(choice) {
+            case 1:
+                systemStatus();
+                break;
+
+            case 2:
+                cleanRAM();
+                break;
+
+            case 3:
+                tips();
+                break;
+
+            case 4:
+                cout << "\nExiting Optimizer...\n";
+                break;
+
+            default:
+                cout << "\nInvalid Choice!\n";
+        }
+
+    } while(choice != 4);
+
+    return 0;
+}
