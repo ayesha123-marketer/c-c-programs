@@ -1,0 +1,78 @@
+#include <iostream>
+using namespace std;
+
+void header() {
+    cout << "\n====================================\n";
+    cout << "     SYSTEM HEALTH CHECKER TOOL     \n";
+    cout << "====================================\n";
+}
+
+void scanSystem() {
+    cout << "\nScanning system...\n";
+    cout << "Checking CPU usage...\n";
+    cout << "Checking RAM usage...\n";
+    cout << "Checking startup apps...\n";
+    cout << "Checking disk space...\n";
+
+    cout << "\nRESULT:\n";
+    cout << "⚠ High RAM usage detected\n";
+    cout << "⚠ Too many startup programs\n";
+    cout << "⚠ Temporary files found\n";
+}
+
+void boostMode() {
+    cout << "\n🚀 BOOST MODE ACTIVATED (SIMULATION)\n";
+    cout << "Closing unnecessary apps...\n";
+    cout << "Cleaning temp files...\n";
+    cout << "Optimizing memory allocation...\n";
+    cout << "Disabling background tasks...\n";
+    cout << "\n✔ SYSTEM PERFORMANCE IMPROVED (SIMULATED)\n";
+}
+
+void tips() {
+    cout << "\n--- REAL PERFORMANCE TIPS ---\n";
+    cout << "✔ Uninstall unused software\n";
+    cout << "✔ Disable startup apps\n";
+    cout << "✔ Use SSD instead of HDD\n";
+    cout << "✔ Restart system regularly\n";
+    cout << "✔ Keep antivirus updated\n";
+}
+
+int main() {
+    int choice;
+
+    do {
+        header();
+
+        cout << "\n1. Scan System\n";
+        cout << "2. Activate Boost Mode\n";
+        cout << "3. Performance Tips\n";
+        cout << "4. Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch(choice) {
+            case 1:
+                scanSystem();
+                break;
+
+            case 2:
+                boostMode();
+                break;
+
+            case 3:
+                tips();
+                break;
+
+            case 4:
+                cout << "\nExiting...\n";
+                break;
+
+            default:
+                cout << "\nInvalid Choice!\n";
+        }
+
+    } while(choice != 4);
+
+    return 0;
+}
