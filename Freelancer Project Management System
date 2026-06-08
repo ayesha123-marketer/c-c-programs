@@ -1,0 +1,89 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Project {
+public:
+    int projectID;
+    string clientName;
+    string projectName;
+    string deadline;
+    string status;
+    double payment;
+
+    void addProject() {
+        cout << "\nEnter Project ID: ";
+        cin >> projectID;
+
+        cin.ignore();
+        cout << "Enter Client Name: ";
+        getline(cin, clientName);
+
+        cout << "Enter Project Name: ";
+        getline(cin, projectName);
+
+        cout << "Enter Deadline: ";
+        getline(cin, deadline);
+
+        cout << "Enter Status (Pending/In Progress/Completed): ";
+        getline(cin, status);
+
+        cout << "Enter Payment: ";
+        cin >> payment;
+    }
+
+    void displayProject() {
+        cout << "\n-----------------------------------";
+        cout << "\nProject ID : " << projectID;
+        cout << "\nClient Name: " << clientName;
+        cout << "\nProject Name: " << projectName;
+        cout << "\nDeadline: " << deadline;
+        cout << "\nStatus: " << status;
+        cout << "\nPayment: $" << payment;
+        cout << "\n-----------------------------------\n";
+    }
+};
+
+int main() {
+    vector<Project> projects;
+    int choice;
+
+    do {
+        cout << "\n===== FREELANCER PROJECT MANAGEMENT SYSTEM =====\n";
+        cout << "1. Add Project\n";
+        cout << "2. View All Projects\n";
+        cout << "3. Exit\n";
+        cout << "Enter Choice: ";
+        cin >> choice;
+
+        switch(choice) {
+            case 1: {
+                Project p;
+                p.addProject();
+                projects.push_back(p);
+                cout << "\nProject Added Successfully!\n";
+                break;
+            }
+
+            case 2:
+                if(projects.empty()) {
+                    cout << "\nNo Projects Found!\n";
+                } else {
+                    for(auto &p : projects) {
+                        p.displayProject();
+                    }
+                }
+                break;
+
+            case 3:
+                cout << "\nExiting...\n";
+                break;
+
+            default:
+                cout << "\nInvalid Choice!\n";
+        }
+
+    } while(choice != 3);
+
+    return 0;
+}
