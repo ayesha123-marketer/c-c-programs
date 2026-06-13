@@ -1,0 +1,39 @@
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+int main() {
+    int choice;
+
+    cout << "==================================" << endl;
+    cout << "   COMPUTER MAINTENANCE TOOL" << endl;
+    cout << "==================================" << endl;
+    cout << "1. Show System Information" << endl;
+    cout << "2. Clear Temporary Files" << endl;
+    cout << "3. Exit" << endl;
+    cout << "Enter Choice: ";
+    cin >> choice;
+
+    switch(choice) {
+        case 1:
+            cout << "\nFetching System Information...\n";
+            system("systeminfo");
+            break;
+
+        case 2:
+            cout << "\nCleaning Temporary Files...\n";
+            system("del /q/f/s %TEMP%\\*");
+            cout << "Temporary files deleted successfully.\n";
+            break;
+
+        case 3:
+            cout << "Exiting Program...\n";
+            break;
+
+        default:
+            cout << "Invalid Choice!\n";
+    }
+
+    return 0;
+}
